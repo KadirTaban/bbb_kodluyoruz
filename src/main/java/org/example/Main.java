@@ -1,6 +1,9 @@
 package org.example;
 
 import org.example.entities.*;
+import org.example.entities.enums.CarType;
+import org.example.entities.enums.ConsumerType;
+import org.example.entities.enums.RentType;
 import org.example.services.CarRentServiceImpl;
 
 public class Main extends CarRentServiceImpl {

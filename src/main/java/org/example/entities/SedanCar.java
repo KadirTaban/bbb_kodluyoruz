@@ -1,5 +1,8 @@
 package org.example.entities;
 
+import org.example.entities.enums.CarType;
+import org.example.entities.enums.RentType;
+
 public class SedanCar extends Car {
 
 

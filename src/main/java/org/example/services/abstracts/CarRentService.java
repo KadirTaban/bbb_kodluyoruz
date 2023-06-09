@@ -7,4 +7,6 @@ public interface CarRentService {
     public int rentMonthly(Car car, int value);
     public int rentWeekly(Car car,int value);
 
+
+
 }
