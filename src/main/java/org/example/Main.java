@@ -19,6 +19,6 @@ public class Main extends CarRentServiceImpl {
         SedanCar sedanCar = new SedanCar("orange","340lt",RentType.WEEKLY,CarType.SEDAN,12);
         SedanCar sedanCar_2 = new SedanCar("orange","340lt",RentType.MONTHLY,CarType.SEDAN,12);
 
-        System.out.println(rentService.RentACar(consumer,hatchbackCar,hatchbackCar.rentType));
+        System.out.println(rentService.RentACar(consumer_2,sedanCar,sedanCar.rentType));
     }
 }

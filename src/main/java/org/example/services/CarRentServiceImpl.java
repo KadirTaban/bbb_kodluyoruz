@@ -25,7 +25,7 @@ public class CarRentServiceImpl implements CarRentService {
     }
 
     public boolean isSuv(Car car){
-        if(!car.carType.equals(CarType.SUV)&&car.rentType.equals(RentType.DAILY)){
+        if(!car.carType.equals(CarType.SUV)){
             return false;
         }
         return true;
@@ -55,7 +55,7 @@ public class CarRentServiceImpl implements CarRentService {
             SedanCar sedanCar = (SedanCar) car;
             System.out.println("Aracın "+ car.rentType+ " kirasını giriniz");
             int value = input.nextInt();
-            return sedanCar.color+" renkte "+sedanCar.age+" yasinda "+sedanCar.carType+" araç "+sedanCar.rentType + " " + setPrice(value,car)+" tl yekiralanmıstır";
+            return sedanCar.color+" renkte "+sedanCar.age+" yasinda "+sedanCar.carType+" araç "+sedanCar.rentType + " " + setPrice(value,car)+" tl ye kiralanmıstır";
         }
         return "baska bir opsiyon deneyiniz";
     }
