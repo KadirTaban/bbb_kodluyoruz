@@ -7,12 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AirCarServiceImpl {
-
     private Seat seat;
-
-
-
-
 
     public AirCar buyTicket(String ticketName,AirCar airCar) {
         for (Seat seat : airCar.seatData) {
