@@ -29,7 +29,7 @@ public class Main {
 
             System.out.println("Please choose an airline (1 for THY, 2 for PEGASUS): ");
             airlineChoice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline character
+            scanner.nextLine();
 
             switch (airlineChoice) {
                 case 1:

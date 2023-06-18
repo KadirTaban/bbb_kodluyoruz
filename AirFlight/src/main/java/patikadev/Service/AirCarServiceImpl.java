@@ -23,7 +23,7 @@ public class AirCarServiceImpl {
 
     public void getSeatName(AirCar airCar) {
         List<Seat> seats = airCar.getAvailableSeats();
-        System.out.println("Kalan koltuklar");
+        System.out.println("Kalan koltuklar\n");
         seats.stream().forEach(seat -> System.out.print(" "+seat.name));
 
     }
