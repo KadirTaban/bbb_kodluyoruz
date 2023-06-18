@@ -18,6 +18,7 @@ public class Main {
         THY thy = new THY(2,"THY",true);
         PEGASUS pegasus = new PEGASUS(2,"Pegasus",false);
         String sideNumber = new String();
+        int airlineChoice;
         while (true) {
             System.out.println("Please enter your seat side number (or 'q' to quit): ");
             sideNumber = scanner.nextLine();
@@ -27,7 +28,7 @@ public class Main {
             }
 
             System.out.println("Please choose an airline (1 for THY, 2 for PEGASUS): ");
-            int airlineChoice = scanner.nextInt();
+            airlineChoice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character
 
             switch (airlineChoice) {
