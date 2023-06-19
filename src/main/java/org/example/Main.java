@@ -1,27 +1,48 @@
 package org.example;
 
-import org.example.entities.*;
-import org.example.entities.enums.CarType;
-import org.example.entities.enums.ConsumerType;
-import org.example.entities.enums.RentType;
-import org.example.services.CarRentServiceImpl;
 
-public class Main extends CarRentServiceImpl {
+import org.example.secondWeek.Entity.PEGASUS;
+import org.example.secondWeek.Entity.THY;
+import org.example.secondWeek.Service.AirCarServiceImpl;
+
+import java.util.Scanner;
+
+public class Main {
+
     public static void main(String[] args) {
-        CarRentServiceImpl rentService = new CarRentServiceImpl();
+        AirCarServiceImpl airService = new AirCarServiceImpl();
+        Scanner scanner = new Scanner(System.in);
+        THY thy = new THY(2,"THY",true);
+        PEGASUS pegasus = new PEGASUS(2,"Pegasus",false);
+        String sideNumber = new String();
+        int airlineChoice;
+        while (true) {
+            System.out.println("Please enter your seat side number (or 'q' to quit): ");
+            sideNumber = scanner.nextLine();
 
-        Consumer consumer = new Consumer("Ali", ConsumerType.Civil);
-        Consumer consumer_2 = new Consumer("Koza", ConsumerType.Company);
+            if (sideNumber.equals("q")) {
+                break;
+            }
 
-        SuvCar suv = new SuvCar("blue","230lt", RentType.DAILY, CarType.SUV,12);
-        SuvCar suv2 = new SuvCar("blue","230lt", RentType.MONTHLY, CarType.SUV,12);
+            System.out.println("Please choose an airline (1 for THY, 2 for PEGASUS): ");
+            airlineChoice = scanner.nextInt();
+            scanner.nextLine();
 
-        HatchbackCar hatchbackCar = new HatchbackCar("red","340lt",RentType.DAILY,CarType.HATCHBACK,11);
-        HatchbackCar hatchbackCar1 = new HatchbackCar("purple","475lt",RentType.MONTHLY,CarType.HATCHBACK,10);
-
-        SedanCar sedanCar = new SedanCar("orange","340lt",RentType.WEEKLY,CarType.SEDAN,12);
-        SedanCar sedanCar_2 = new SedanCar("orange","340lt",RentType.MONTHLY,CarType.SEDAN,12);
-
-        System.out.println(rentService.RentACar(consumer_2,sedanCar,sedanCar.rentType));
+            switch (airlineChoice) {
+                case 1:
+                    airService.buyTicket(sideNumber, thy);
+                    airService.getSeatName(thy);
+                    break;
+                case 2:
+                    airService.buyTicket(sideNumber, pegasus);
+                    airService.getSeatName(pegasus);
+                    break;
+                default:
+                    System.out.println("Invalid airline choice!");
+                    break;
+            }
+        }
     }
 }
+
+
