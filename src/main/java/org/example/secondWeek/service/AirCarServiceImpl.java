@@ -1,7 +1,7 @@
-package org.example.secondWeek.Service;
+package org.example.secondWeek.service;
 
-import org.example.secondWeek.Entity.AirCar;
-import org.example.secondWeek.Entity.Seat;
+import org.example.secondWeek.entity.AirCar;
+import org.example.secondWeek.entity.Seat;
 import java.util.List;
 
 public class AirCarServiceImpl {

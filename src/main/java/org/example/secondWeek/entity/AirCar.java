@@ -1,7 +1,7 @@
-package org.example.secondWeek.Entity;
+package org.example.secondWeek.entity;
 
 
-import org.example.secondWeek.Data.SeatData;
+import org.example.secondWeek.data.SeatData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,9 @@ public abstract class AirCar {
         this.brandName = brandName;
         this.isAbroad = isAbroad;
         this.seatData = new SeatData().getSeats();
+    }
+
+    public AirCar(String seatName, boolean abroad, boolean hasMeal, boolean empty) {
     }
 
     public List<Seat> getAvailableSeats() {

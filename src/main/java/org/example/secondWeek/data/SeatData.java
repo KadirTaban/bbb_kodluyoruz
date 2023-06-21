@@ -1,7 +1,8 @@
-package org.example.secondWeek.Data;
+package org.example.secondWeek.data;
 
 
-import org.example.secondWeek.Entity.Seat;
+
+import org.example.secondWeek.entity.Seat;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package org.example.secondWeek.Entity;
+package org.example.secondWeek.entity;
 public class Seat {
     public String name;
     public boolean isEmpty;
