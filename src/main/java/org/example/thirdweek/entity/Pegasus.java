@@ -11,11 +11,4 @@ public class Pegasus extends Ticket{
         super(id, seatName, isAbroad, hasMeal, isEmpty, companyName);
     }
 
-    public Pegasus() {
-        super("A1", true, true, true, CompanyName.THY);
-    }
-
-    public Pegasus(String seatName, boolean isAbroad, boolean hasMeal, boolean isEmpty, CompanyName companyName) {
-        super(seatName, isAbroad, hasMeal, isEmpty, companyName);
-    }
 }

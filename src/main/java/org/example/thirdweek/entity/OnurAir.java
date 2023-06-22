@@ -12,11 +12,4 @@ public class OnurAir extends Ticket{
     }
 
 
-    public OnurAir(String seatName, boolean isAbroad, boolean hasMeal, boolean isEmpty, CompanyName companyName) {
-        super(seatName, isAbroad, hasMeal, isEmpty, companyName);
-    }
-
-    public OnurAir() {
-
-    }
 }

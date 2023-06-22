@@ -1,41 +1,37 @@
 package org.example.thirdweek.service;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.example.thirdweek.entity.OnurAir;
 import org.example.thirdweek.entity.Pegasus;
 import org.example.thirdweek.entity.THY;
 import org.example.thirdweek.entity.Ticket;
-import org.example.thirdweek.enums.CompanyName;
 import org.example.thirdweek.model.data.TicketData;
 import org.example.thirdweek.repository.OnurAirRepository;
 import org.example.thirdweek.repository.PegasusRepository;
 import org.example.thirdweek.repository.THYRepository;
-import org.example.thirdweek.repository.TicketRepository;
+import org.example.thirdweek.service.abstracts.TicketFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class TicketServiceImpl {
     private Ticket ticket;
     private TicketData ticketData = new TicketData();
-    private final THYRepository thyRepository;
+    private final THYServiceImpl thyService;
     private final OnurAirRepository onurAirRepository;
     private final PegasusRepository pegasusRepository;
     public void saveMockTicket() {
         List<Ticket> tickets = ticketData.getTickets();
 
         tickets.forEach(ticket -> {
-            Ticket createdTicket = TicketFactory.createTicket(ticket.getCompanyName(), ticket.getSeatName(),
+            Ticket createdTicket = TicketFactory.createTicket(ticket.getId(),ticket.getCompanyName(), ticket.getSeatName(),
                     ticket.isAbroad(), ticket.isHasMeal(), ticket.isEmpty());
             // Save the createdTicket using the respective repository
             switch (ticket.getCompanyName()) {
                 case THY:
-                    thyRepository.save((THY) createdTicket);
+                    thyService.save((THY) createdTicket);
                     break;
                 case ONUR_AIR:
                     onurAirRepository.save((OnurAir) createdTicket);

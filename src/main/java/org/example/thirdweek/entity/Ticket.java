@@ -23,9 +23,11 @@ public class Ticket {
     @Column
     private boolean isEmpty;
     @Column
+    private double price;
+    @Column
     private CompanyName companyName;
 
-    public Ticket(String seatName, boolean isAbroad, boolean hasMeal, boolean isEmpty, CompanyName companyName){
+    public Ticket(long id, String seatName, boolean isAbroad, boolean hasMeal, boolean isEmpty, CompanyName companyName){
         this.seatName = seatName;
         this.isEmpty = isEmpty;
         this.isAbroad = isAbroad;
