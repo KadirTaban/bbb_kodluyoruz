@@ -1,15 +1,32 @@
 package org.example.thirdweek.entity;
 
+import lombok.*;
 import org.example.thirdweek.enums.CompanyName;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "ONURAIR")
-public class OnurAir extends Ticket{
-    public OnurAir(long id, String seatName, boolean isAbroad, boolean hasMeal, boolean isEmpty, CompanyName companyName) {
-        super(id, seatName, isAbroad, hasMeal, isEmpty, companyName);
-    }
-
+@AllArgsConstructor
+@RequiredArgsConstructor
+@Builder
+@Getter
+@Setter
+public class OnurAir {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Column
+    private String seatName;
+    @Column
+    private Boolean isAbroad;
+    @Column
+    private Boolean hasMeal;
+    @Column
+    private Boolean isEmpty;
+    @Column
+    private double price;
+    @Column
+    private CompanyName companyName;
 
 }

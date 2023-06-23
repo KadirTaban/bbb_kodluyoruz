@@ -2,8 +2,10 @@ package org.example.thirdweek.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.thirdweek.entity.THY;
+import org.example.thirdweek.entity.Ticket;
+import org.example.thirdweek.model.dto.THYDto;
+import org.example.thirdweek.model.dtoConverter.THYDtoConverter;
 import org.example.thirdweek.repository.THYRepository;
-import org.example.thirdweek.repository.TicketRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,16 +14,31 @@ import java.util.List;
 @RequiredArgsConstructor
 public class THYServiceImpl {
     private final THYRepository repository;
-    private final TicketRepository ticketRepository;
+    private final THYDtoConverter thyDtoConverter;
+    public THYDto save(Ticket thy){
+        THY thy1 = THY.builder()
+                .hasMeal(thy.getHasMeal())
+                .price(thy.getPrice())
+                .isEmpty(thy.getIsEmpty())
+                .isAbroad(thy.getIsAbroad())
+                .companyName(thy.getCompanyName())
+                .seatName(thy.getSeatName())
+                .build();
 
-    public THY save(THY thy){
-
-        return repository.save(thy) ;
+        return thyDtoConverter.convertToTHY(repository.save(thy1));
     }
 
-        public List<THY> thyList(){
-        List<THY> thyList = repository.findAllByEmptyIsTrue();
-        return thyList;
+    public List<THY> findAvailable() {
+        List<THY> availableTHYs = repository.findTHYByIsEmptyIs();
+
+        return availableTHYs;
+    }
+    public THY buyTicket(long id){
+        THY ticket = repository.findTHYById(id);
+        ticket.setIsEmpty(false);
+        repository.save(ticket);
+        return ticket;
+
 
     }
-}
+    }

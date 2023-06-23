@@ -1,6 +1,6 @@
 package org.example.thirdweek.entity;
 
-import lombok.Getter;
+import lombok.*;
 import org.example.thirdweek.enums.CompanyName;
 
 import javax.persistence.*;
@@ -9,17 +9,27 @@ import java.util.List;
 @Entity
 @Table(name = "THY")
 @Getter
-public class THY extends Ticket {
+@Setter
+@AllArgsConstructor
+@RequiredArgsConstructor
+@Builder
+public class THY{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
+    @Column
+    private String seatName;
+    @Column
+    private Boolean isAbroad;
+    @Column
+    private Boolean hasMeal;
+    @Column
+    private Boolean isEmpty;
+    @Column
+    private double price;
+    @Column
+    private CompanyName companyName;
 
-    public THY(long id, String seatName, boolean isAbroad, boolean hasMeal, boolean isEmpty, CompanyName companyName) {
-        super(id,seatName, isAbroad, hasMeal, isEmpty, companyName);
-        this.id = id;
-    }
 
-    public THY() {
 
-    }
 }

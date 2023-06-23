@@ -1,48 +1,47 @@
 package org.example.thirdweek.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.thirdweek.entity.OnurAir;
 import org.example.thirdweek.entity.Pegasus;
-import org.example.thirdweek.entity.THY;
 import org.example.thirdweek.entity.Ticket;
 import org.example.thirdweek.model.data.TicketData;
 import org.example.thirdweek.repository.OnurAirRepository;
 import org.example.thirdweek.repository.PegasusRepository;
-import org.example.thirdweek.repository.THYRepository;
-import org.example.thirdweek.service.abstracts.TicketFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class TicketServiceImpl {
+public class TicketServiceImpl extends TicketFactory {
     private Ticket ticket;
     private TicketData ticketData = new TicketData();
     private final THYServiceImpl thyService;
-    private final OnurAirRepository onurAirRepository;
-    private final PegasusRepository pegasusRepository;
+    private final PegasusServiceImpl pegasusService;
+    private final OnurAirServiceImpl onurAirService;
+
     public void saveMockTicket() {
         List<Ticket> tickets = ticketData.getTickets();
 
         tickets.forEach(ticket -> {
             Ticket createdTicket = TicketFactory.createTicket(ticket.getId(),ticket.getCompanyName(), ticket.getSeatName(),
-                    ticket.isAbroad(), ticket.isHasMeal(), ticket.isEmpty());
+                    ticket.getIsAbroad(), ticket.getHasMeal(), ticket.getIsEmpty());
             // Save the createdTicket using the respective repository
             switch (ticket.getCompanyName()) {
                 case THY:
-                    thyService.save((THY) createdTicket);
+                    thyService.save(createdTicket);
                     break;
                 case ONUR_AIR:
-                    onurAirRepository.save((OnurAir) createdTicket);
+                    pegasusService.save(createdTicket);
                     break;
                 case PEGASUS:
-                    pegasusRepository.save((Pegasus) createdTicket);
+                    onurAirService.save( createdTicket);
                     break;
                 default:
                     throw new IllegalArgumentException("Invalid company name: " + ticket.getCompanyName());
             }
         });
+
+
 
 
 

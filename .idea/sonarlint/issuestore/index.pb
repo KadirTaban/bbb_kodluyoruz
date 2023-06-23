@@ -23,8 +23,6 @@ Dsrc/main/java/org/example/firstWeek/services/CarRentServiceImpl.java,b/1/b197c
 pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
 c
 3src/main/java/org/example/secondWeek/assignment.txt,c/c/cc1ca5f07d6f88ac58f2b1c58f9318ce633e7cf8
-j
-:src/main/java/org/example/thirdweek/enums/CompanyName.java,7/2/728603701bc484b7519c6182de80cfaf16ec1755
 g
 7src/main/java/org/example/secondWeek/entity/AirCar.java,8/9/89cf5f31537bbe830a887af2caf3357409e07d98
 s
@@ -37,7 +35,13 @@ e
 5src/main/java/org/example/secondWeek/entity/Seat.java,c/c/cc052efca68b7d636c088134abca9b43d8eaa0d6
 h
 8src/main/java/org/example/secondWeek/entity/PEGASUS.java,d/f/dfd6384c6701ff1547317b7e4aab2e7a6bf4cb69
+b
+2src/main/java/org/example/thirdweek/assignment.txt,3/8/38e2b3767cdf4fc3435383a0206fc919f9391097
+d
+4src/main/java/org/example/SpringBootApplication.java,9/a/9ad904d21db2979434a0282eec678e345020bbba
+u
+Esrc/main/java/org/example/thirdweek/repository/OnurAirRepository.java,1/b/1bd2e063d911879181eb7247badff2574355b188
 x
 Hsrc/main/java/org/example/thirdweek/service/abstracts/TicketService.java,f/e/fee64f45d37fd39cc240e088e8cc78dbb9577fdc
-t
-Dsrc/main/java/org/example/thirdweek/controller/TicketController.java,c/8/c8610dbcffed25ee07a5a3bfa90939d66e24970e
+j
+:src/main/java/org/example/thirdweek/enums/CompanyName.java,7/2/728603701bc484b7519c6182de80cfaf16ec1755

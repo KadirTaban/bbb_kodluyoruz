@@ -8,8 +8,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Ticket")
 @Getter
+@Setter
 @AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
+@Builder
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,22 +19,23 @@ public class Ticket {
     @Column
     private String seatName;
     @Column
-    private boolean isAbroad;
+    private Boolean isAbroad;
     @Column
-    private boolean hasMeal;
+    private Boolean hasMeal;
     @Column
-    private boolean isEmpty;
+    private Boolean isEmpty;
     @Column
     private double price;
     @Column
     private CompanyName companyName;
 
-    public Ticket(long id, String seatName, boolean isAbroad, boolean hasMeal, boolean isEmpty, CompanyName companyName){
+
+    public Ticket(long id, String seatName, Boolean isAbroad, Boolean hasMeal, Boolean isEmpty, CompanyName companyName) {
+        this.id = id;
         this.seatName = seatName;
-        this.isEmpty = isEmpty;
         this.isAbroad = isAbroad;
         this.hasMeal = hasMeal;
+        this.isEmpty = isEmpty;
         this.companyName = companyName;
-
     }
 }
