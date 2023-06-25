@@ -1,9 +1,15 @@
 package org.example.thirdweek.model.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.example.thirdweek.enums.CompanyName;
-
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class TicketDto {
-    private long id;
     private String seatName;
     private Boolean isAbroad;
     private Boolean hasMeal;

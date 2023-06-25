@@ -2,12 +2,17 @@ package org.example.thirdweek.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.thirdweek.entity.Pegasus;
+import org.example.thirdweek.entity.THY;
 import org.example.thirdweek.entity.Ticket;
 import org.example.thirdweek.model.data.TicketData;
+import org.example.thirdweek.model.dtoConverter.PegasusTicketDtoConverter;
+import org.example.thirdweek.model.dtoConverter.THYDtoConverter;
+import org.example.thirdweek.model.dtoConverter.THYTicketDtoConverter;
 import org.example.thirdweek.repository.OnurAirRepository;
 import org.example.thirdweek.repository.PegasusRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,7 +23,9 @@ public class TicketServiceImpl extends TicketFactory {
     private final THYServiceImpl thyService;
     private final PegasusServiceImpl pegasusService;
     private final OnurAirServiceImpl onurAirService;
-
+    private final THYDtoConverter thyDtoConverter;
+    private final THYTicketDtoConverter thyTicketDtoConverter;
+    private final PegasusTicketDtoConverter pegasusTicketDtoConverter;
     public void saveMockTicket() {
         List<Ticket> tickets = ticketData.getTickets();
 
@@ -31,20 +38,25 @@ public class TicketServiceImpl extends TicketFactory {
                     thyService.save(createdTicket);
                     break;
                 case ONUR_AIR:
-                    pegasusService.save(createdTicket);
+                    onurAirService.save(createdTicket);
                     break;
                 case PEGASUS:
-                    onurAirService.save( createdTicket);
+                    pegasusService.save( createdTicket);
                     break;
                 default:
                     throw new IllegalArgumentException("Invalid company name: " + ticket.getCompanyName());
             }
         });
+    }
 
 
-
-
-
+    public List<Ticket> availableTicketList(){
+        List<Ticket> availableTickets = new ArrayList<>();
+        thyService.findAvailable().stream().forEach(thy -> availableTickets.add(thyTicketDtoConverter.convertToTicket(thy)));
+        pegasusService.findAvailable().stream().forEach(pegasus -> availableTickets.add(pegasusTicketDtoConverter.convertToTicket(pegasus)));
+        return availableTickets;
+    }
+}
 /*
         List<THY> thyTicket = tickets.stream()
                 .filter(ticket1-> ticket1.getCompanyName()==CompanyName.THY)
@@ -65,8 +77,3 @@ public class TicketServiceImpl extends TicketFactory {
                 .map(ticket1 -> new Pegasus(ticket1.getSeatName(),ticket1.isAbroad(),ticket1.isAbroad(),ticket1.isHasMeal(),CompanyName.PEGASUS))
                 .collect(Collectors.toList());
         pegasusTickets.stream().forEach(pegasus -> pegasusRepository.save(pegasus));*/
-    }
-
-
-
-    }

@@ -38,7 +38,7 @@ public class THYServiceImpl {
         ticket.setIsEmpty(false);
         repository.save(ticket);
         return ticket;
-
-
     }
+
+
     }

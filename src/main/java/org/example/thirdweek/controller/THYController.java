@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/ticketTHY")
+@RequestMapping("/api/v1/ticketTHY")
 @RestController
 @AllArgsConstructor
 public class THYController {
