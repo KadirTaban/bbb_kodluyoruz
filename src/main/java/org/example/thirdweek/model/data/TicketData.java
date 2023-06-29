@@ -3,10 +3,12 @@ package org.example.thirdweek.model.data;
 
 import org.example.thirdweek.entity.Ticket;
 import org.example.thirdweek.enums.CompanyName;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class TicketData {
 
         private List<Ticket> tickets;

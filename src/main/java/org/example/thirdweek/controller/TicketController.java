@@ -3,11 +3,9 @@ package org.example.thirdweek.controller;
 
 import lombok.AllArgsConstructor;
 import org.example.thirdweek.entity.Ticket;
+import org.example.thirdweek.model.data.TicketData;
 import org.example.thirdweek.service.TicketServiceImpl;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,9 +14,10 @@ import java.util.List;
 @AllArgsConstructor
 public class TicketController {
     private final TicketServiceImpl service;
+    private final TicketData ticketData;
     @PostMapping("/save")
     public String mockData(){
-        service.saveMockTicket();
+        service.saveMockTicket(ticketData.getTickets());
         return "Success";
     }
 
@@ -27,6 +26,12 @@ public class TicketController {
     public List<Ticket> findAvailableTickets(){
 
         return service.availableTicketList();
+    }
+
+    @PostMapping("/buy/{id}")
+    public String buyTicket(@PathVariable("id") long id){
+        service.buyTicket(id);
+        return "Success";
     }
 
 }

@@ -4,12 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.example.thirdweek.entity.Pegasus;
 import org.example.thirdweek.entity.THY;
 import org.example.thirdweek.entity.Ticket;
-import org.example.thirdweek.model.data.TicketData;
+import org.example.thirdweek.model.dtoConverter.OnurAirTicketDtoConverter;
 import org.example.thirdweek.model.dtoConverter.PegasusTicketDtoConverter;
 import org.example.thirdweek.model.dtoConverter.THYDtoConverter;
 import org.example.thirdweek.model.dtoConverter.THYTicketDtoConverter;
 import org.example.thirdweek.repository.OnurAirRepository;
-import org.example.thirdweek.repository.PegasusRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,18 +18,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TicketServiceImpl extends TicketFactory {
     private Ticket ticket;
-    private TicketData ticketData = new TicketData();
     private final THYServiceImpl thyService;
     private final PegasusServiceImpl pegasusService;
     private final OnurAirServiceImpl onurAirService;
-    private final THYDtoConverter thyDtoConverter;
     private final THYTicketDtoConverter thyTicketDtoConverter;
     private final PegasusTicketDtoConverter pegasusTicketDtoConverter;
-    public void saveMockTicket() {
-        List<Ticket> tickets = ticketData.getTickets();
+    private final OnurAirTicketDtoConverter onurAirTicketDtoConverter;
+
+    public void saveMockTicket(List<Ticket> tickets) {
 
         tickets.forEach(ticket -> {
-            Ticket createdTicket = TicketFactory.createTicket(ticket.getId(),ticket.getCompanyName(), ticket.getSeatName(),
+            Ticket createdTicket = TicketFactory.createTicket(ticket.getId(), ticket.getCompanyName(), ticket.getSeatName(),
                     ticket.getIsAbroad(), ticket.getHasMeal(), ticket.getIsEmpty());
             // Save the createdTicket using the respective repository
             switch (ticket.getCompanyName()) {
@@ -41,7 +39,7 @@ public class TicketServiceImpl extends TicketFactory {
                     onurAirService.save(createdTicket);
                     break;
                 case PEGASUS:
-                    pegasusService.save( createdTicket);
+                    pegasusService.save(createdTicket);
                     break;
                 default:
                     throw new IllegalArgumentException("Invalid company name: " + ticket.getCompanyName());
@@ -50,11 +48,37 @@ public class TicketServiceImpl extends TicketFactory {
     }
 
 
-    public List<Ticket> availableTicketList(){
+    public List<Ticket> availableTicketList() {
         List<Ticket> availableTickets = new ArrayList<>();
-        thyService.findAvailable().stream().forEach(thy -> availableTickets.add(thyTicketDtoConverter.convertToTicket(thy)));
-        pegasusService.findAvailable().stream().forEach(pegasus -> availableTickets.add(pegasusTicketDtoConverter.convertToTicket(pegasus)));
+        thyService.findAvailable().stream().filter(ticket -> ticket.getIsEmpty() == true).forEach(thy -> availableTickets.add(thyTicketDtoConverter.convertToTicket(thy)));
+        pegasusService.findAvailable().stream().filter(ticket -> ticket.getIsEmpty() == true).forEach(pegasus -> availableTickets.add(pegasusTicketDtoConverter.convertToTicket(pegasus)));
+        onurAirService.findAvailable().stream().filter(ticket -> ticket.getIsEmpty() == true).forEach(onurAir -> availableTickets.add(onurAirTicketDtoConverter.convertToTicket(onurAir)));
         return availableTickets;
+    }
+
+
+    public String buyTicket(long id) {
+        List<Ticket> tickets = availableTicketList();
+
+        List<Ticket> boughtTicket = tickets.stream().filter(ticket1 -> ticket1.getId() == id).toList();
+
+        for (Ticket ticket1 : boughtTicket) {
+            switch (ticket1.getCompanyName()) {
+                case THY:
+                    thyService.buyTicket(id);
+                    break;
+                case ONUR_AIR:
+                    onurAirService.buyTicket(id);
+                    break;
+                case PEGASUS:
+                    pegasusService.buyTicket(id);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid company name: " + ticket.getCompanyName());
+            }
+        }
+
+        return "tickets";
     }
 }
 /*

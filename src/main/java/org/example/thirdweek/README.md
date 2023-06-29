@@ -5,7 +5,7 @@
 
 ### Tech
 
-- Spring Boot 11
+- Spring suBoot 11
 - H2 database
 - Lombok
 
